@@ -26,7 +26,7 @@ create table MEMBERSHIP(
 	MEM_BALANCE double,
 	primary key(MEM_NUM)
 	
-)
+);
 
 describe membership;
 
@@ -50,7 +50,7 @@ create table RENTAL(
 	foreign key(MEMBER_NUM) references MEMBERSHIP(MEM_NUM),
 	primary key(RENT_NUM)
 
-)
+);
 
 describe rental;
 Result:
@@ -67,7 +67,7 @@ create table price (
 	PRICE_RENTFEE double,
 	PRICE_DAILYLATEFEE double,
 	primary key(PRICE_CODE)
-)
+);
 
 describe price;
 Result:
@@ -86,7 +86,7 @@ create table movie(
     MOVIE_PRICE int,
 	primary key(MOVIE_NUM),
 	foreign key(MOVIE_PRICE) references price(PRICE_CODE)
-)
+);
 describe movie;
 Result:
 MOVIE_NUM	int	NO	PRI		
@@ -103,7 +103,7 @@ create table video(
 	VID_INDATE date,
 	primary key(VID_NUM),
 	foreign key(MOVIE_NUMBER) references movie(MOVIE_NUM)
-)
+);
 describe video;
 Result:
 MOVIE_NUMBER	int	YES	MUL		
@@ -119,19 +119,22 @@ create table DetailRental	(
 	DETAIL_DUEDATE date,
 	DETAIL_RETURNDATE date,
 	DETAIL_DAILYLATEFEE double,
+	primary key(RENT_NUMBER,VIDEO_NUMBER)
 	foreign key(RENT_NUMBER) references rental(RENT_NUM) ,
 	foreign key(VIDEO_NUMBER) references video(VID_NUM)
-)
+);
 
 describe DetailRental;
 
 Result:
-RENT_NUMBER	int	YES	MUL		
-VIDEO_NUMBER	int	YES	MUL		
+RENT_NUMBER	int	NO	PRI		
+VIDEO_NUMBER	int	NO	PRI		
 DETAIL_FEE	double	YES			
 DETAIL_DUEDATE	date	YES			
 DETAIL_RETURNDATE	date	YES			
 DETAIL_DAILYLATEFEE	double	YES			
+
+		
 
 
 #Question2
